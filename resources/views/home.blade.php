@@ -1,11 +1,12 @@
 @extends('layout')
 
 @section('content')
+<section class="poster">
+    <img src="{{ asset('img/poster.webp') }}" alt="NDA Empire by Niomba — {{ __('Quatre perruques de la maison : body wave noir, frange rideau, ombré cendré, balayage miel') }}" width="1200" height="1200" fetchpriority="high">
+</section>
+
 <section class="hero">
     <div class="wrap">
-        <div class="lockup">
-            <span class="foil foil-full" role="img" aria-label="NDA Empire by Niomba"></span>
-        </div>
         <h1>{{ __('Vois ta prochaine perruque sur toi, avant de la porter.') }}</h1>
         <p class="lead">{{ __('Des poses parfaites, à Kigali. Perruques, mèches, tresses et cils par Niomba.') }}</p>
         <div class="btn-row">
@@ -18,7 +19,7 @@
 <section class="cabin-band">
     <div class="wrap">
         <div class="mirror">
-            <div class="glass"><img src="{{ asset('img/models.jpg') }}" alt="{{ __('Quatre perruques de la maison : body wave noir, frange rideau, ombré cendré, balayage miel') }}" width="1100" height="843" loading="lazy"></div>
+            <div class="glass"><img src="{{ asset('img/mirror.jpg') }}" alt="{{ __('Quatre perruques de la maison : body wave noir, frange rideau, ombré cendré, balayage miel') }}" width="610" height="598" loading="lazy"></div>
         </div>
         <div>
             <h2>{{ __('La cabine d\'essayage') }}</h2>
