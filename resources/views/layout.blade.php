@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ isset($title) ? $title.' | ' : '' }}NDA EMPIRE by Niomba · Kigali</title>
     <meta name="description" content="{{ __('Perruques, pose de perruques, tresses et extensions de cils à Kigali. Réserve en ligne et essaie les perruques sur ta photo.') }}">
-    <meta name="theme-color" content="#2a0f3a">
+    <meta name="theme-color" content="#ffffff">
     <meta property="og:title" content="NDA EMPIRE by Niomba">
     <meta property="og:description" content="{{ __('Perruques, pose de perruques, tresses et extensions de cils à Kigali. Réserve en ligne et essaie les perruques sur ta photo.') }}">
     <meta property="og:image" content="{{ asset('img/logo-round.jpg') }}">
