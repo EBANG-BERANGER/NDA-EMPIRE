@@ -25,6 +25,7 @@ return [
 
     // Niomba's account: created by `php artisan app:admin`, never open to public sign-up.
     'admin_email' => env('ADMIN_EMAIL'),
+    'admin_password' => env('ADMIN_PASSWORD'), // only used once, to create the account
 
     // AI try-on (Google Gemini image model).
     'gemini_key' => env('GEMINI_API_KEY'),

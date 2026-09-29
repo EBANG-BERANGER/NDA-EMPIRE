@@ -16,7 +16,7 @@ Artisan::command('app:admin', function () {
     }
     $user = User::firstOrNew(['email' => $email]);
     if (! $user->exists) {
-        $password = env('ADMIN_PASSWORD');
+        $password = config('salon.admin_password');
         if (! $password || strlen($password) < 10) {
             return $this->error('ADMIN_PASSWORD missing or shorter than 10 characters.');
         }

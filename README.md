@@ -2,7 +2,7 @@
 
 Site du salon (perruques, poses, tresses, cils) à Kigali : réservations en ligne, catalogue de perruques avec cabine d'essayage IA, comptes clientes, notifications, espace de gestion.
 
-Laravel 13, Blade, CSS pur (`public/css/app.css`), sans étape de build JS. Hébergé sur Railway, déployé à chaque push sur `main`.
+Laravel 13 (PHP 8.4), Blade, CSS pur (`public/css/app.css`), sans étape de build JS. Hébergé sur Railway (Railpack + FrankenPHP, réglages PHP dans `php.ini`), déployé à chaque push sur `main`. Railpack met la config en cache au démarrage : ne jamais appeler `env()` hors de `config/`.
 
 ## Ce que fait le site
 

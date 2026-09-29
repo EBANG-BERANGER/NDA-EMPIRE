@@ -1,8 +1,0 @@
-[phases.setup]
-nixPkgs = ["php84", "php84Packages.composer"]
-
-# Nixpacks' PHP provider serves public/index.php with nginx + php-fpm; no [start] override.
-# Reminders need a SECOND Railway service on this repo with start command: php artisan schedule:work
-
-[phases.build]
-cmds = ["php artisan storage:link", "php artisan view:cache"]
