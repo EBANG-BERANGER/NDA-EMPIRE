@@ -55,6 +55,7 @@ class ShopController extends Controller
 
     public function tryOn(Request $request, Wig $wig, WigTryOn $tryOn)
     {
+        abort_unless($wig->isWig(), 404);
         $user = $request->user();
         if (! $user->selfie_path) {
             return back()->withErrors(['selfie' => __("Ajoute d'abord une photo de toi, de face.")]);

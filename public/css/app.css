@@ -183,33 +183,53 @@ td input, td select { padding: 7px 10px; }
 
 /* Brand: the real monogram (rose-gold, transparent) with the logo's spaced EMPIRE wordmark. */
 .mark { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--rose); line-height: 1; }
-.mark img { height: 38px; width: auto; }
+.mark-foil { width: 58px; }
 .mark span { font: 400 .6rem/1 var(--display); letter-spacing: .5em; margin-right: -.5em; }
 .lang { display: inline-flex; gap: 2px; border: 1px solid var(--rose-soft); border-radius: 99px; padding: 2px; }
 .lang a { padding: 3px 10px; border-radius: 99px; font-size: .82rem; letter-spacing: .06em; }
 .lang a[aria-current] { background: var(--rose); color: var(--plum); }
 .wordmark { font: 400 1.35rem/1 var(--display); letter-spacing: .55em; margin-right: -.55em; color: var(--rose); }
 
-/* Hero: brand lockup + promise on the left, the arched mirror holding the house wigs on the right. */
-.hero { padding-top: clamp(28px, 5vw, 64px); }
-.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
-.lockup { display: inline-flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: clamp(28px, 4vw, 44px); }
-.lockup img { width: clamp(140px, 19vw, 220px); height: auto; }
-.lockup .wordmark { font-size: clamp(1.25rem, 2.6vw, 1.75rem); }
-.lockup .by { font: 500 .78rem/1 var(--body); letter-spacing: .38em; margin-right: -.38em; text-transform: uppercase; color: var(--muted); }
-.hero h1 { color: var(--pearl); font-size: clamp(2.1rem, 4.6vw, 3.6rem); max-width: 16ch; }
-.hero .lead { font-size: 1.15rem; color: var(--muted); max-width: 46ch; }
-.hero-mirror { max-width: 460px; width: 100%; justify-self: center; aspect-ratio: 4 / 5; }
-.hero-mirror > .glass { background: #fff; }
-.hero-mirror > .glass img { object-position: 50% 100%; }
-@media (max-width: 860px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-  .hero-copy { text-align: center; }
-  .hero h1, .hero .lead { margin-left: auto; margin-right: auto; }
-  .hero .btn-row { justify-content: center; }
-  .hero-mirror { max-width: 340px; }
-}
 
 .foot-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .foot-brand img { width: 92px; height: auto; }
 .foot-brand .wordmark { font-size: 1rem; margin: 0; }
+
+/* Foil: the monogram filled with a rose-gold metal gradient through its own shape (CSS mask).
+   Falls back to the flat rose-gold PNG where masks are unsupported. */
+.foil { display: block; aspect-ratio: 670 / 548; background: url("../img/monogram.png") center / contain no-repeat; }
+@supports ((-webkit-mask-image: url("")) or (mask-image: url(""))) {
+  .foil {
+    background: linear-gradient(115deg, #b98479 0%, #f3d2c6 22%, #c8948a 38%, #fbe6dc 52%, #b07a70 68%, #e9bfb2 84%, #a86f66 100%);
+    -webkit-mask: url("../img/monogram.png") center / contain no-repeat;
+    mask: url("../img/monogram.png") center / contain no-repeat;
+  }
+}
+
+/* Hero: the logo is the protagonist — centred, large, lit like a salon sign. */
+.hero { position: relative; padding: clamp(40px, 7vw, 96px) 0 clamp(48px, 8vw, 110px); text-align: center; overflow: hidden; }
+.hero::before { content: ""; position: absolute; left: 50%; top: 4%; width: min(900px, 140vw); aspect-ratio: 1; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(246, 201, 220, .22), rgba(216, 167, 160, .08) 55%, transparent); pointer-events: none; }
+.hero .wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+.lockup { display: flex; flex-direction: column; align-items: center; gap: clamp(14px, 2vw, 22px); margin-bottom: clamp(36px, 5vw, 56px); }
+.lockup .foil { width: clamp(210px, 34vw, 400px); filter: drop-shadow(0 6px 24px rgba(0, 0, 0, .35)); }
+.lockup .wordmark { font-size: clamp(1.6rem, 4vw, 2.7rem); letter-spacing: .6em; margin-right: -.6em; color: #ecc7bc; }
+.lockup .by { font: 500 clamp(.72rem, 1.2vw, .9rem)/1 var(--body); letter-spacing: .42em; margin-right: -.42em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { color: var(--pearl); font-size: clamp(1.9rem, 4vw, 3.1rem); max-width: 20ch; margin-inline: auto; }
+.hero .lead { font-size: 1.15rem; color: var(--muted); max-width: 50ch; margin-inline: auto; }
+.hero .btn-row { justify-content: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .lockup { animation: unveil 1.1s cubic-bezier(.2, .7, .2, 1) both; }
+  @keyframes unveil { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+}
+
+/* The fitting room band: mirror beside the three real steps of a try-on. */
+.cabin-band .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+.cabin-band .mirror { max-width: 440px; width: 100%; justify-self: center; aspect-ratio: 4 / 5; }
+.cabin-band .glass { background: #fff; }
+.cabin-band .glass img { object-position: 50% 100%; }
+.steps { list-style: none; counter-reset: step; margin: 28px 0 32px; padding: 0; display: grid; gap: 20px; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+.steps li::before { content: counter(step); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--rose); color: var(--rose); font: 500 1.2rem/1 var(--display); }
+.steps strong { display: block; color: var(--pearl); font-weight: 500; }
+.steps span { color: var(--muted); }
+@media (max-width: 860px) { .cabin-band .wrap { grid-template-columns: 1fr; } .cabin-band .mirror { max-width: 340px; } }

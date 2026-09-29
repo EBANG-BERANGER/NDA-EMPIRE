@@ -43,7 +43,7 @@ class SalonTest extends TestCase
     public function test_english_switch_translates_and_sticks_to_the_account(): void
     {
         $user = $this->client();
-        $this->actingAs($user)->get('/?lang=en')->assertSee('Book an appointment')->assertSee('Wig install (lace frontal)');
+        $this->actingAs($user)->get('/?lang=en')->assertSee('Book an appointment')->assertSee('Frontal wig install');
         $this->assertSame('en', $user->fresh()->locale);
         $this->get('/')->assertSee('lang="en"', false);
     }

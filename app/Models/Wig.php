@@ -7,9 +7,16 @@ use Illuminate\Support\Facades\Storage;
 
 class Wig extends Model
 {
-    protected $fillable = ['name', 'description', 'price', 'image_path', 'video_path', 'in_stock'];
+    protected $fillable = ['name', 'kind', 'description', 'price', 'image_path', 'video_path', 'in_stock'];
 
     protected $casts = ['in_stock' => 'boolean'];
+
+    public const KINDS = ['wig' => 'Perruque', 'bundle' => 'Mèches'];
+
+    public function isWig(): bool
+    {
+        return $this->kind !== 'bundle';
+    }
 
     public function imageUrl(): string
     {

@@ -8,7 +8,7 @@ return [
     'phone' => '+250 791 700 902',
     'whatsapp' => '250791700902',
     'instagram' => env('SALON_INSTAGRAM'),
-    'tiktok' => env('SALON_TIKTOK'),
+    'tiktok' => env('SALON_TIKTOK', 'https://www.tiktok.com/@ndaempirebyniomba'),
 
     // Opening hours per ISO weekday (1 = Monday ... 7 = Sunday). null = closed.
     'hours' => [

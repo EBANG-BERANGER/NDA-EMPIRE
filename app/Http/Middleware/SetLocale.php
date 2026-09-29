@@ -23,8 +23,8 @@ class SetLocale
 
         $locale = $request->session()->get('locale')
             ?? $user?->locale
-            ?? $request->getPreferredLanguage(self::LOCALES)
-            ?? 'fr';
+            ?? $request->getPreferredLanguage(['en', 'fr']) // first = default: her audience (TikTok, Kigali) is English-first
+            ?? 'en';
 
         app()->setLocale($locale);
 

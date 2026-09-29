@@ -127,6 +127,7 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
+            'kind' => ['required', Rule::in(array_keys(Wig::KINDS))],
             'description' => ['nullable', 'string', 'max:1000'],
             'price' => ['required', 'integer', 'min:0'],
             'image' => ['required', 'image', 'max:10240'],
@@ -135,6 +136,7 @@ class AdminController extends Controller
 
         Wig::create([
             'name' => $data['name'],
+            'kind' => $data['kind'],
             'description' => $data['description'] ?? null,
             'price' => $data['price'],
             'image_path' => $request->file('image')->store('wigs', 'public'),

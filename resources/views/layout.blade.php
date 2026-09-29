@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v=2">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v=3">
     <script src="{{ asset('js/app.js') }}?v=2" defer></script>
 </head>
 <body>
@@ -25,12 +25,12 @@
 <header class="site-head">
     <div class="wrap">
         <a class="mark" href="{{ route('home') }}" aria-label="NDA EMPIRE, {{ __('accueil') }}">
-            <img src="{{ asset('img/monogram.png') }}" alt="" width="46" height="38">
+            <span class="foil mark-foil" role="img" aria-hidden="true"></span>
             <span>EMPIRE</span>
         </a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">{{ __('Menu') }}</button>
         <nav class="nav" id="nav">
-            <a href="{{ route('shop') }}" @if(request()->routeIs('shop')) aria-current="page" @endif>{{ __('Perruques') }}</a>
+            <a href="{{ route('shop') }}" @if(request()->routeIs('shop')) aria-current="page" @endif>{{ __('Perruques & mèches') }}</a>
             <a href="{{ route('home') }}#prestations">{{ __('Prestations') }}</a>
             <a href="{{ route('portfolio') }}" @if(request()->routeIs('portfolio')) aria-current="page" @endif>{{ __('Réalisations') }}</a>
             <a href="{{ route('booking') }}" @if(request()->routeIs('booking')) aria-current="page" @endif>{{ __('Réserver') }}</a>
@@ -64,7 +64,7 @@
 <footer class="site-foot">
     <div class="wrap">
         <div class="foot-brand">
-            <img src="{{ asset('img/monogram.png') }}" alt="NDA" width="92" height="75">
+            <span class="foil" style="width:104px" role="img" aria-label="NDA"></span>
             <p class="wordmark">EMPIRE</p>
             <p class="muted small">by Niomba · Kigali</p>
         </div>

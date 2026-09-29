@@ -50,7 +50,7 @@
     </aside>
 
     <div>
-        <h1 style="font-size:clamp(2rem,5vw,3.2rem)">{{ __('Perruques') }}</h1>
+        <h1 style="font-size:clamp(2rem,5vw,3.2rem)">{{ __('Perruques & mèches') }}</h1>
         <p class="muted">{{ __('Touche « Essayer » pour te voir avec. « Commander » la réserve pour toi : tu paies au salon, au retrait.') }}</p>
         @if ($wigs->isEmpty())
             <p class="panel" style="margin-top:24px">{{ __('Les premières perruques arrivent très bientôt.') }} <a href="https://wa.me/{{ config('salon.whatsapp') }}">{{ __('Écris-nous sur WhatsApp pour connaître celles disponibles.') }}</a></p>
