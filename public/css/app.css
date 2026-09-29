@@ -197,12 +197,13 @@ td input, td select { padding: 7px 10px; }
 
 /* Foil: the monogram filled with a rose-gold metal gradient through its own shape (CSS mask).
    Falls back to the flat rose-gold PNG where masks are unsupported. */
-.foil { display: block; aspect-ratio: 670 / 548; background: url("../img/monogram.png") center / contain no-repeat; }
+.foil { --art: url("../img/monogram.png"); display: block; aspect-ratio: 840 / 693; max-width: 100%; background: var(--art) center / contain no-repeat; }
+.foil-full { --art: url("../img/logo-full.png"); aspect-ratio: 1029 / 1017; }
 @supports ((-webkit-mask-image: url("")) or (mask-image: url(""))) {
   .foil {
     background: linear-gradient(115deg, #b98479 0%, #f3d2c6 22%, #c8948a 38%, #fbe6dc 52%, #b07a70 68%, #e9bfb2 84%, #a86f66 100%);
-    -webkit-mask: url("../img/monogram.png") center / contain no-repeat;
-    mask: url("../img/monogram.png") center / contain no-repeat;
+    -webkit-mask: var(--art) center / contain no-repeat;
+    mask: var(--art) center / contain no-repeat;
   }
 }
 
@@ -211,9 +212,7 @@ td input, td select { padding: 7px 10px; }
 .hero::before { content: ""; position: absolute; left: 50%; top: 4%; width: min(900px, 140vw); aspect-ratio: 1; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(246, 201, 220, .22), rgba(216, 167, 160, .08) 55%, transparent); pointer-events: none; }
 .hero .wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
 .lockup { display: flex; flex-direction: column; align-items: center; gap: clamp(14px, 2vw, 22px); margin-bottom: clamp(36px, 5vw, 56px); }
-.lockup .foil { width: clamp(210px, 34vw, 400px); filter: drop-shadow(0 6px 24px rgba(0, 0, 0, .35)); }
-.lockup .wordmark { font-size: clamp(1.6rem, 4vw, 2.7rem); letter-spacing: .6em; margin-right: -.6em; color: #ecc7bc; }
-.lockup .by { font: 500 clamp(.72rem, 1.2vw, .9rem)/1 var(--body); letter-spacing: .42em; margin-right: -.42em; text-transform: uppercase; color: var(--muted); }
+.lockup .foil { width: min(78vw, 440px); filter: drop-shadow(0 6px 24px rgba(0, 0, 0, .35)); }
 .hero h1 { color: var(--pearl); font-size: clamp(1.9rem, 4vw, 3.1rem); max-width: 20ch; margin-inline: auto; }
 .hero .lead { font-size: 1.15rem; color: var(--muted); max-width: 50ch; margin-inline: auto; }
 .hero .btn-row { justify-content: center; }

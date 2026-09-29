@@ -4,9 +4,7 @@
 <section class="hero">
     <div class="wrap">
         <div class="lockup">
-            <span class="foil" role="img" aria-label="NDA"></span>
-            <span class="wordmark">EMPIRE</span>
-            <span class="by">by Niomba</span>
+            <span class="foil foil-full" role="img" aria-label="NDA Empire by Niomba"></span>
         </div>
         <h1>{{ __('Vois ta prochaine perruque sur toi, avant de la porter.') }}</h1>
         <p class="lead">{{ __('Des poses parfaites, à Kigali. Perruques, mèches, tresses et cils par Niomba.') }}</p>
