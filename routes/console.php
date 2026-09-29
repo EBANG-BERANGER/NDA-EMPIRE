@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schedule;
 // ADMIN_EMAIL / ADMIN_PASSWORD before anyone could register that email. Never
 // overwrites the password of an existing account.
 Artisan::command('app:admin', function () {
-    $email = env('ADMIN_EMAIL');
+    $email = config('salon.admin_email');
     if (! $email) {
         return $this->info('ADMIN_EMAIL not set, skipping.');
     }

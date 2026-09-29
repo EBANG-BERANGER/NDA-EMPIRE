@@ -17,7 +17,12 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:80'],
             'phone' => ['required', 'string', 'max:30'],
-            'email' => ['required', 'email', 'max:120', 'unique:users'],
+            // The admin email is reserved: `app:admin` promotes whoever holds it.
+            'email' => ['required', 'email', 'max:120', 'unique:users', function ($attribute, $value, $fail) {
+                if (config('salon.admin_email') && strcasecmp($value, config('salon.admin_email')) === 0) {
+                    $fail(__('Cet email ne peut pas être utilisé.'));
+                }
+            }],
             'password' => ['required', 'confirmed', PasswordRule::min(8)],
         ]);
 

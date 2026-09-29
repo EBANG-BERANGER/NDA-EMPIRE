@@ -147,7 +147,6 @@
     "Écrire sur WhatsApp": "Message us on WhatsApp",
     "Écris-nous sur WhatsApp pour connaître celles disponibles.": "Message us on WhatsApp to see what's available.",
     "Épuisée": "Sold out",
-
     "Pose de perruque (lace frontale)": "Wig install (lace frontal)",
     "Installation closure": "Closure install",
     "Tresses knotless": "Knotless braids",
@@ -155,9 +154,9 @@
     "Pose de cils classique": "Classic lash extensions",
     "Pose de cils volume russe": "Russian volume lashes",
     "Remplissage cils": "Lash fill",
-
     "Changer ton mot de passe — NDA EMPIRE": "Change your password — NDA EMPIRE",
     "Tu as demandé à changer ton mot de passe.": "You asked to change your password.",
     "Choisir un nouveau mot de passe": "Choose a new password",
-    "Ce lien expire dans 60 minutes. Si tu n'as rien demandé, ignore cet email.": "This link expires in 60 minutes. If you didn't ask for it, ignore this email."
+    "Ce lien expire dans 60 minutes. Si tu n'as rien demandé, ignore cet email.": "This link expires in 60 minutes. If you didn't ask for it, ignore this email.",
+    "Cet email ne peut pas être utilisé.": "This email can't be used."
 }

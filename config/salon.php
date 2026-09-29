@@ -23,6 +23,9 @@ return [
     'slot_minutes' => 30,
     'booking_days_ahead' => 60,
 
+    // Niomba's account: created by `php artisan app:admin`, never open to public sign-up.
+    'admin_email' => env('ADMIN_EMAIL'),
+
     // AI try-on (Google Gemini image model).
     'gemini_key' => env('GEMINI_API_KEY'),
     'gemini_model' => env('GEMINI_IMAGE_MODEL', 'gemini-2.5-flash-image'),

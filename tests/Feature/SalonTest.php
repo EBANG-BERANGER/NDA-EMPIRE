@@ -73,6 +73,10 @@ class SalonTest extends TestCase
 
     public function test_admin_area_is_admin_only(): void
     {
+        config(['salon.admin_email' => 'niomba@test.rw']);
+        $this->post('/inscription', ['name' => 'X', 'phone' => '1', 'email' => 'NIOMBA@test.rw', 'password' => 'secret123', 'password_confirmation' => 'secret123'])
+            ->assertSessionHasErrors('email');
+
         $this->actingAs($this->client())->get('/admin')->assertForbidden();
         $this->actingAs($this->client(['is_admin' => true]))->get('/admin')->assertOk();
     }
