@@ -24,7 +24,7 @@ document.querySelectorAll('form[data-tryon]').forEach((form) => {
     mirror?.classList.add('busy');
     mirror?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     document.querySelectorAll('form[data-tryon] button').forEach((b) => { b.disabled = true; });
-    form.querySelector('button').textContent = 'Essayage en cours…';
+    form.querySelector('button').textContent = form.dataset.busy;
   });
 });
 

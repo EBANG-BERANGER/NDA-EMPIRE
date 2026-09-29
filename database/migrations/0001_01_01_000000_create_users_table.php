@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone', 30)->nullable();
             $table->boolean('is_admin')->default(false);
             $table->string('selfie_path')->nullable();
+            $table->string('locale', 2)->default('fr');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

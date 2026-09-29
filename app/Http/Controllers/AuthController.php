@@ -21,7 +21,9 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', PasswordRule::min(8)],
         ]);
 
-        Auth::login(User::create($data), true);
+        $user = User::create($data);
+        $user->forceFill(['locale' => app()->getLocale()])->save();
+        Auth::login($user, true);
         $request->session()->regenerate();
 
         return redirect()->intended(route('account'));
@@ -32,7 +34,7 @@ class AuthController extends Controller
         $credentials = $request->validate(['email' => ['required', 'email'], 'password' => ['required']]);
 
         if (! Auth::attempt($credentials, true)) {
-            return back()->withErrors(['email' => 'Email ou mot de passe incorrect.'])->onlyInput('email');
+            return back()->withErrors(['email' => __('Email ou mot de passe incorrect.')])->onlyInput('email');
         }
         $request->session()->regenerate();
 
@@ -54,7 +56,7 @@ class AuthController extends Controller
         rescue(fn () => Password::sendResetLink($request->only('email')));
 
         // Same answer whether or not the account exists: no email enumeration.
-        return back()->with('status', "Si un compte existe avec cet email, un lien pour changer ton mot de passe vient d'être envoyé.");
+        return back()->with('status', __("Si un compte existe avec cet email, un lien pour changer ton mot de passe vient d'être envoyé."));
     }
 
     public function resetPassword(Request $request)
@@ -72,7 +74,7 @@ class AuthController extends Controller
         });
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', 'Mot de passe changé. Tu peux te connecter.')
-            : back()->withErrors(['email' => "Ce lien n'est plus valide. Demande un nouveau lien."]);
+            ? redirect()->route('login')->with('status', __('Mot de passe changé. Tu peux te connecter.'))
+            : back()->withErrors(['email' => __("Ce lien n'est plus valide. Demande un nouveau lien.")]);
     }
 }

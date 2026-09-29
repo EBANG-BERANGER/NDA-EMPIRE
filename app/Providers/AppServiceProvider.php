@@ -24,10 +24,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('pagination');
 
         ResetPassword::toMailUsing(fn ($user, string $token) => (new MailMessage)
-            ->subject('Changer ton mot de passe — NDA EMPIRE')
-            ->line('Tu as demandé à changer ton mot de passe.')
-            ->action('Choisir un nouveau mot de passe', route('password.reset', ['token' => $token, 'email' => $user->email]))
-            ->line("Ce lien expire dans 60 minutes. Si tu n'as rien demandé, ignore cet email."));
+            ->subject(__('Changer ton mot de passe — NDA EMPIRE'))
+            ->line(__('Tu as demandé à changer ton mot de passe.'))
+            ->action(__('Choisir un nouveau mot de passe'), route('password.reset', ['token' => $token, 'email' => $user->email]))
+            ->line(__("Ce lien expire dans 60 minutes. Si tu n'as rien demandé, ignore cet email.")));
 
         if ($this->app->isProduction()) {
             URL::forceScheme('https');

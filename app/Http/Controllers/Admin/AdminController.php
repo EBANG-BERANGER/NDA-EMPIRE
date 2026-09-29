@@ -36,15 +36,14 @@ class AdminController extends Controller
         $status = $request->validate(['status' => ['required', Rule::in(array_keys(Booking::STATUSES))]])['status'];
         $booking->update(['status' => $status]);
 
-        $when = $booking->starts_at->translatedFormat('l j F à H:i');
-        $message = match ($status) {
-            'confirmed' => 'Ton rendez-vous est confirmé : '.$booking->service->name.', '.$when.'. À très vite !',
-            'cancelled' => 'Ton rendez-vous du '.$when.' a été annulé. Contacte-nous sur WhatsApp pour en trouver un autre.',
-            'done' => 'Merci pour ta visite ! Montre-nous ta nouvelle coiffure en nous identifiant.',
-            default => null,
+        [$title, $message] = match ($status) {
+            'confirmed' => ['Rendez-vous confirmé', 'Ton rendez-vous est confirmé : :service, :when. À très vite !'],
+            'cancelled' => ['Rendez-vous annulé', 'Ton rendez-vous du :when a été annulé. Contacte-nous sur WhatsApp pour en trouver un autre.'],
+            'done' => ['Merci pour ta visite', 'Merci pour ta visite ! Montre-nous ta nouvelle coiffure en nous identifiant.'],
+            default => [null, null],
         };
         if ($message) {
-            SalonNotice::send($booking->user, 'Rendez-vous '.mb_strtolower($booking->statusLabel()), $message, route('account'));
+            SalonNotice::send($booking->user, $title, $message, route('account'), ['service' => $booking->service->name, 'when' => $booking->starts_at]);
         }
 
         return back()->with('status', 'Rendez-vous mis à jour.');
@@ -55,13 +54,13 @@ class AdminController extends Controller
         $status = $request->validate(['status' => ['required', Rule::in(array_keys(Order::STATUSES))]])['status'];
         $order->update(['status' => $status]);
 
-        $message = match ($status) {
-            'ready' => 'Ta perruque « '.$order->wig->name.' » est prête. Passe la récupérer au salon.',
-            'cancelled' => 'Ta commande « '.$order->wig->name.' » a été annulée. Contacte-nous sur WhatsApp pour en savoir plus.',
-            default => null,
+        [$title, $message] = match ($status) {
+            'ready' => ['Commande prête', 'Ta perruque « :wig » est prête. Passe la récupérer au salon.'],
+            'cancelled' => ['Commande annulée', 'Ta commande « :wig » a été annulée. Contacte-nous sur WhatsApp pour en savoir plus.'],
+            default => [null, null],
         };
         if ($message) {
-            SalonNotice::send($order->user, 'Commande '.mb_strtolower($order->statusLabel()), $message, route('account'));
+            SalonNotice::send($order->user, $title, $message, route('account'), ['wig' => $order->wig->name]);
         }
 
         return back()->with('status', 'Commande mise à jour.');

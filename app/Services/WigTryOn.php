@@ -21,7 +21,7 @@ class WigTryOn
     {
         $key = config('salon.gemini_key');
         if (! $key) {
-            throw new RuntimeException('La cabine IA n\'est pas encore activée.');
+            throw new RuntimeException(__("La cabine IA n'est pas encore activée."));
         }
 
         $part = fn (string $disk, string $path) => ['inline_data' => [
@@ -51,6 +51,6 @@ class WigTryOn
         }
 
         logger()->warning('Gemini try-on returned no image', ['status' => $response->status(), 'body' => mb_substr($response->body(), 0, 500)]);
-        throw new RuntimeException('L\'IA n\'a pas pu créer l\'image. Essaie une photo de face, bien éclairée.');
+        throw new RuntimeException(__("L'IA n'a pas pu créer l'image. Essaie une photo de face, bien éclairée."));
     }
 }

@@ -40,7 +40,7 @@ class ShopController extends Controller
         }
         $user->forceFill(['selfie_path' => $request->file('selfie')->store('selfies', 'local')])->save();
 
-        return redirect()->route('shop')->with('status', 'Photo enregistrée. Choisis une perruque et touche « Essayer ».');
+        return redirect()->route('shop')->with('status', __('Photo enregistrée. Choisis une perruque et touche « Essayer ».'));
     }
 
     public function deleteSelfie(Request $request)
@@ -50,20 +50,20 @@ class ShopController extends Controller
         $user->tryons()->delete();
         $user->forceFill(['selfie_path' => null])->save();
 
-        return redirect()->route('shop')->with('status', 'Ta photo et tes essais ont été supprimés.');
+        return redirect()->route('shop')->with('status', __('Ta photo et tes essais ont été supprimés.'));
     }
 
     public function tryOn(Request $request, Wig $wig, WigTryOn $tryOn)
     {
         $user = $request->user();
         if (! $user->selfie_path) {
-            return back()->withErrors(['selfie' => "Ajoute d'abord une photo de toi, de face."]);
+            return back()->withErrors(['selfie' => __("Ajoute d'abord une photo de toi, de face.")]);
         }
 
         // Each try-on costs real money on the Gemini account.
         $key = 'tryon:'.$user->id;
         if (RateLimiter::tooManyAttempts($key, config('salon.tryons_per_day'))) {
-            return back()->withErrors(['selfie' => "Tu as atteint la limite d'essais pour aujourd'hui. Reviens demain."]);
+            return back()->withErrors(['selfie' => __("Tu as atteint la limite d'essais pour aujourd'hui. Reviens demain.")]);
         }
         RateLimiter::hit($key, 86400);
 
@@ -85,11 +85,10 @@ class ShopController extends Controller
 
         $order = Order::create(['user_id' => $request->user()->id, 'wig_id' => $wig->id, 'price' => $wig->price, 'note' => $data['note'] ?? null]);
 
-        SalonNotice::admins('Nouvelle commande',
-            $request->user()->name.' a commandé « '.$wig->name.' » ('.number_format($order->price, 0, ',', ' ').' RWF).',
-            route('admin'));
+        SalonNotice::admins('Nouvelle commande', ':name a commandé « :wig » (:price RWF).', route('admin'),
+            ['name' => $request->user()->name, 'wig' => $wig->name, 'price' => number_format($order->price, 0, ',', ' ')]);
 
-        return redirect()->route('account')->with('status', 'Commande envoyée. Tu paies sur place, au retrait.');
+        return redirect()->route('account')->with('status', __('Commande envoyée. Tu paies sur place, au retrait.'));
     }
 
     /** Private images (selfies, try-on results): only their owner or an admin may see them. */

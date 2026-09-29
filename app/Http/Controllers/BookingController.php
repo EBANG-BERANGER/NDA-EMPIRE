@@ -52,14 +52,13 @@ class BookingController extends Controller
         });
 
         if (! $booking) {
-            return back()->withErrors(['starts_at' => "Ce créneau n'est plus libre. Choisis-en un autre."]);
+            return back()->withErrors(['starts_at' => __("Ce créneau n'est plus libre. Choisis-en un autre.")]);
         }
 
-        SalonNotice::admins('Nouvelle réservation',
-            $request->user()->name.' : '.$service->name.', '.$start->translatedFormat('l j F à H:i').'.',
-            route('admin'));
+        SalonNotice::admins('Nouvelle réservation', ':name : :service, :when.', route('admin'),
+            ['name' => $request->user()->name, 'service' => $service->name, 'when' => $start]);
 
-        return redirect()->route('account')->with('status', 'Réservation envoyée. Tu seras notifiée dès que Niomba la confirme.');
+        return redirect()->route('account')->with('status', __('Réservation envoyée. Tu seras notifiée dès que Niomba la confirme.'));
     }
 
     public function cancel(Request $request, Booking $booking)
@@ -67,10 +66,9 @@ class BookingController extends Controller
         abort_unless($booking->user_id === $request->user()->id && in_array($booking->status, Booking::BLOCKING), 403);
         $booking->update(['status' => 'cancelled']);
 
-        SalonNotice::admins('Réservation annulée',
-            $request->user()->name.' a annulé : '.$booking->service->name.', '.$booking->starts_at->translatedFormat('j F à H:i').'.',
-            route('admin'));
+        SalonNotice::admins('Réservation annulée', ':name a annulé : :service, :when.', route('admin'),
+            ['name' => $request->user()->name, 'service' => $booking->service->name, 'when' => $booking->starts_at]);
 
-        return back()->with('status', 'Réservation annulée.');
+        return back()->with('status', __('Réservation annulée.'));
     }
 }

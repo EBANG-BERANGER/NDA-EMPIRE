@@ -47,9 +47,6 @@ section { padding: clamp(56px, 9vw, 110px) 0; }
 /* Header: the monogram is the brand, built in type like the logo. */
 .site-head { position: sticky; top: 0; z-index: 20; background: rgba(31, 10, 44, .86); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rose-soft); }
 .site-head .wrap { display: flex; align-items: center; gap: 20px; min-height: 68px; }
-.mark { display: inline-flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--rose); line-height: 1; }
-.mark b { font: 400 1.9rem/1 var(--display); letter-spacing: -.12em; margin-right: .12em; }
-.mark span { font: 400 .62rem/1 var(--display); letter-spacing: .42em; margin-right: -.42em; margin-top: 3px; }
 .nav { display: flex; gap: 6px 22px; margin-left: auto; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
 .nav a { color: var(--pearl); text-decoration: none; font-size: .98rem; }
 .nav a:hover, .nav a[aria-current] { color: var(--blush); }
@@ -85,12 +82,6 @@ section { padding: clamp(56px, 9vw, 110px) 0; }
 @media (prefers-reduced-motion: reduce) { .mirror.busy > .glass::after { animation: none; background: rgba(246, 201, 220, .18); } }
 
 /* Hero */
-.hero { padding-top: clamp(32px, 6vw, 72px); }
-.hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(28px, 6vw, 80px); align-items: center; }
-.hero h1 { color: var(--pearl); }
-.hero .lead { font-size: 1.2rem; color: var(--muted); }
-.hero .mirror { max-width: 430px; justify-self: center; width: 100%; }
-@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } .hero .mirror { order: -1; max-width: 320px; } }
 
 /* Price list, set like a salon menu with dotted leaders. */
 .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px 64px; }
@@ -189,3 +180,36 @@ td input, td select { padding: 7px 10px; }
 .wa { position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 56px; height: 56px; border-radius: 50%; background: var(--jade); display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0, 0, 0, .35); }
 .wa svg { width: 28px; height: 28px; fill: var(--pearl); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Brand: the real monogram (rose-gold, transparent) with the logo's spaced EMPIRE wordmark. */
+.mark { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; text-decoration: none; color: var(--rose); line-height: 1; }
+.mark img { height: 38px; width: auto; }
+.mark span { font: 400 .6rem/1 var(--display); letter-spacing: .5em; margin-right: -.5em; }
+.lang { display: inline-flex; gap: 2px; border: 1px solid var(--rose-soft); border-radius: 99px; padding: 2px; }
+.lang a { padding: 3px 10px; border-radius: 99px; font-size: .82rem; letter-spacing: .06em; }
+.lang a[aria-current] { background: var(--rose); color: var(--plum); }
+.wordmark { font: 400 1.35rem/1 var(--display); letter-spacing: .55em; margin-right: -.55em; color: var(--rose); }
+
+/* Hero: brand lockup + promise on the left, the arched mirror holding the house wigs on the right. */
+.hero { padding-top: clamp(28px, 5vw, 64px); }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+.lockup { display: inline-flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: clamp(28px, 4vw, 44px); }
+.lockup img { width: clamp(140px, 19vw, 220px); height: auto; }
+.lockup .wordmark { font-size: clamp(1.25rem, 2.6vw, 1.75rem); }
+.lockup .by { font: 500 .78rem/1 var(--body); letter-spacing: .38em; margin-right: -.38em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { color: var(--pearl); font-size: clamp(2.1rem, 4.6vw, 3.6rem); max-width: 16ch; }
+.hero .lead { font-size: 1.15rem; color: var(--muted); max-width: 46ch; }
+.hero-mirror { max-width: 460px; width: 100%; justify-self: center; aspect-ratio: 4 / 5; }
+.hero-mirror > .glass { background: #fff; }
+.hero-mirror > .glass img { object-position: 50% 100%; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero-copy { text-align: center; }
+  .hero h1, .hero .lead { margin-left: auto; margin-right: auto; }
+  .hero .btn-row { justify-content: center; }
+  .hero-mirror { max-width: 340px; }
+}
+
+.foot-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.foot-brand img { width: 92px; height: auto; }
+.foot-brand .wordmark { font-size: 1rem; margin: 0; }

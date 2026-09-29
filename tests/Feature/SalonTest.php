@@ -40,6 +40,14 @@ class SalonTest extends TestCase
         $this->actingAs($this->client())->get('/mon-compte')->assertOk();
     }
 
+    public function test_english_switch_translates_and_sticks_to_the_account(): void
+    {
+        $user = $this->client();
+        $this->actingAs($user)->get('/?lang=en')->assertSee('Book an appointment')->assertSee('Wig install (lace frontal)');
+        $this->assertSame('en', $user->fresh()->locale);
+        $this->get('/')->assertSee('lang="en"', false);
+    }
+
     public function test_a_slot_cannot_be_double_booked(): void
     {
         $service = Service::first(); // seeded, 90 min

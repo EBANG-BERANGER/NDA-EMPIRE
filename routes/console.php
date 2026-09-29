@@ -32,8 +32,8 @@ Artisan::command('app:remind', function () {
 
     foreach ($bookings as $booking) {
         SalonNotice::send($booking->user, 'Rappel de rendez-vous',
-            'Petit rappel : '.$booking->service->name.' '.$booking->starts_at->translatedFormat('l j F à H:i').'. Un empêchement ? Préviens-nous sur WhatsApp.',
-            route('account'));
+            'Petit rappel : :service, :when. Un empêchement ? Préviens-nous sur WhatsApp.',
+            route('account'), ['service' => $booking->service->name, 'when' => $booking->starts_at]);
         $booking->update(['reminded' => true]);
     }
     $this->info($bookings->count().' reminder(s) sent.');
