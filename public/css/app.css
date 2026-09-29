@@ -23,7 +23,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(120% 70% at 80% -10%, #52206f 0%, var(--plum) 55%, var(--plum-deep) 100%) fixed;
+  background: radial-gradient(120% 70% at 80% -10%, #52206f 0%, var(--plum) 55%, var(--plum-deep) 100%) no-repeat;
   background-color: var(--plum);
   color: var(--pearl);
   font: 400 1.0625rem/1.65 var(--body);
